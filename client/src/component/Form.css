@@ -1,0 +1,8 @@
+.recipes-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.form{
+    background: red;
+}

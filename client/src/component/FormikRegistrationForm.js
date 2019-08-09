@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
-
+import './Form.css';
 
 
 function RegistrationForm({ errors, touched, values, status }) {
@@ -21,7 +21,7 @@ function RegistrationForm({ errors, touched, values, status }) {
   }, [status]);
   if(login === false){
     return (
-        <Form>
+        <Form className='form'>
         <div>
             {touched.username && errors.username && <p>{errors.username}</p>}
             <Field type="username" name="username" placeholder="Username" />
@@ -44,13 +44,12 @@ function RegistrationForm({ errors, touched, values, status }) {
     return(
         <div>
             {users.map(user =>(
-            <div>
+            <div className='recipes-cards'>
                 <h1>Recipes</h1>
                 <h3>{user.name}</h3>
                 <p>{user.course}</p>
                 <p>{user.main}</p>
                 <p>{user.technique}</p>
-                <div><p>Ingredients: </p>{user.ingredients.map(ing =>(<p>{ing}</p>))}</div>
             </div>
         ))}
         </div>
