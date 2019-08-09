@@ -3,7 +3,10 @@ import axios from 'axios';
 import { Form, Field, withFormik } from 'formik'
 import * as Yup from 'yup'
 
-const RegistrationForm = ({ errors, touched, values, status }) => {
+
+
+
+const RegistrationForm = ({ errors, touched, status }) => {
   const [ users, setUsers ]= useState([]);
   console.log('users', users)
 
@@ -13,32 +16,21 @@ const RegistrationForm = ({ errors, touched, values, status }) => {
     }
   }, [status]);
 
+
   return (
     <div>
-      <h1>User Onboarding Form </h1>
+      <h1> Registration Form </h1>
       <Form >
-        <Field type='text' name='name' placeholder='Name' />
+        <Field  type='text' name='name' placeholder='Name' />
         {touched.name && errors.name && <p className>{errors.name}</p>}
 
-        <Field type='text' name='email' placeholder='Email' />
-        {touched.email && errors.email && <p className>{errors.email}</p>}
-
-        <Field type='password' name='password' placeholder='Password' />
+        <Field  name='password' placeholder='Password' />
         {touched.password && errors.password && <p className>{errors.password}</p>}
 
-        <label>
-          <Field 
-          type='checkbox' 
-          name='termsOfService' 
-          checked={values.termsOfService} />
-          {touched.termsOfService && errors.termsOfService && <p className>{errors.termsOfService}</p>}
-
-        </label>
-          Terms of Service
-        <button type='submit'> Submit </button>
+        <button type='submit'> Sign UP  </button>
       </Form>
       {users.map(user => (
-      <p key={user.id}>{user.email}</p>
+      <p key={user.id}>{user.name}</p>
       ))}
     </div>
   );
@@ -46,24 +38,20 @@ const RegistrationForm = ({ errors, touched, values, status }) => {
 
 
 const FormikRegistrationForm = withFormik({
-  mapPropsToValues({ name, email, password, termsOfService }){
+  mapPropsToValues({ name, password }){
     return{
       name: name ||'',
-      email: email || '',
       password: password || '',
-      termsOfService: termsOfService || false,
     }
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
-    email: Yup.string().required(),
     password: Yup.string().required(),
-    termsOfService: Yup.boolean().oneOf([true],'must accept terms and conditions '), 
   }),
 
   handleSubmit(values, { setStatus }){
     axios
-    .post('https://reqres.in/api/users/ ', values)
+    .post('http://localhost:5000/api/register', values)
     .then(res => {
       setStatus(res.data);
     })
