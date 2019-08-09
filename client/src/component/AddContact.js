@@ -35,7 +35,9 @@ class AddContact extends React.Component {
                 <AddContactList 
                     addContacts={this.state.addContacts}
                     />
-                <FormikRegistrationForm />
+                <FormikRegistrationForm 
+                    addContact={this.addContact}
+                    />
 
             </div>
         )

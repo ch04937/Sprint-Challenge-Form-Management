@@ -5,11 +5,10 @@ class Contact extends React.Component {
     super(props);
   }
   render() {
-    console.log(this.props.contact)
     return (
       <div>
-        <p>Here are some of our members</p>
-      {this.props.addContact.name}
+        {/* <p>Here are some of our members</p>
+      {this.props.addContact.name} */}
       </div>
     );
   }
